@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS Transaction (
     transaction_category VARCHAR(50) NOT NULL,
     amount DOUBLE NOT NULL,
     date DATE NOT NULL,
-    version INT NOT NULL,
+    version INT,
     PRIMARY KEY (id)
     );
