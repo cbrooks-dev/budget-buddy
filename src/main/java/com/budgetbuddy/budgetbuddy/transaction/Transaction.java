@@ -2,6 +2,7 @@ package com.budgetbuddy.budgetbuddy.transaction;
 
 import jakarta.validation.constraints.Positive;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 
 import java.time.LocalDate;
 
@@ -11,5 +12,7 @@ public record Transaction(
         TransactionType transactionType,
         TransactionCategory transactionCategory,
         Double amount,
-        LocalDate date
+        LocalDate date,
+        @Version
+        Integer version
 ) {}
