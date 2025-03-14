@@ -40,7 +40,7 @@ public class TransactionController {
         Optional<Transaction> transaction = transactionRepository.findById(id);
         if (transaction.isPresent())
             return transaction.get();
-        else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        else throw new TransactionNotFoundException();
     }
 
     /* Update */
@@ -56,6 +56,6 @@ public class TransactionController {
     public void deleteTransaction(@PathVariable Integer id) {
         if (transactionRepository.existsById(id))
             transactionRepository.deleteById(id);
-        else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        else throw new TransactionNotFoundException();
     }
 }
