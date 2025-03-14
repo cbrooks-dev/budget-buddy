@@ -1,5 +1,7 @@
 package com.budgetbuddy.budgetbuddy.transaction;
 
-public class TransactionRepository {
+import org.springframework.data.repository.ListCrudRepository;
 
+public interface TransactionRepository
+        extends ListCrudRepository<Transaction, Integer> {
 }
