@@ -1,5 +1,6 @@
 package com.budgetbuddy.budgetbuddy.transaction;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
@@ -7,12 +8,16 @@ import org.springframework.data.annotation.Version;
 import java.time.LocalDate;
 
 public record Transaction(
-        @Positive @Id
+        @Positive @Id @NotNull
         Integer id,
+        @NotNull
         TransactionType transactionType,
+        @NotNull
         TransactionCategory transactionCategory,
+        @NotNull
         Double amount,
+        @NotNull
         LocalDate date,
-        @Version
+        @Version @NotNull
         Integer version
 ) {}
