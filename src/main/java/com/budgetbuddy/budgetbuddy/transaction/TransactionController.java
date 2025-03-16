@@ -5,16 +5,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("/api/transactions")
 @RestController
 public class TransactionController {
 
     private final TransactionRepository transactionRepository;
+    private final TransactionService transactionService;
 
-    public TransactionController(TransactionRepository transactionRepository) {
+    public TransactionController(TransactionRepository transactionRepository,
+                                 TransactionService transactionService)
+    {
         this.transactionRepository = transactionRepository;
+        this.transactionService = transactionService;
     }
 
     /* Create */
@@ -36,10 +39,7 @@ public class TransactionController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public Transaction getTransactionById(@PathVariable Integer id) {
-        Optional<Transaction> transaction = transactionRepository.findById(id);
-        if (transaction.isPresent())
-            return transaction.get();
-        else throw new TransactionNotFoundException();
+        return transactionService.getTransactionById(id);
     }
 
     /* Update */
@@ -53,8 +53,6 @@ public class TransactionController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteTransaction(@PathVariable Integer id) {
-        if (transactionRepository.existsById(id))
-            transactionRepository.deleteById(id);
-        else throw new TransactionNotFoundException();
+        transactionService.deleteTransaction(id);
     }
 }
