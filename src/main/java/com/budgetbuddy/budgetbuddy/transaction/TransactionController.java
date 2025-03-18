@@ -10,13 +10,9 @@ import java.util.List;
 @RestController
 public class TransactionController {
 
-    private final TransactionRepository transactionRepository;
     private final TransactionService transactionService;
 
-    public TransactionController(TransactionRepository transactionRepository,
-                                 TransactionService transactionService)
-    {
-        this.transactionRepository = transactionRepository;
+    public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
 
@@ -24,15 +20,16 @@ public class TransactionController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public Transaction createTransaction
-    (@Valid @RequestBody Transaction transaction) {
-        return transactionRepository.save(transaction);
+            (@Valid @RequestBody Transaction transaction)
+    {
+        return transactionService.createTransaction(transaction);
     }
 
     /* Read All */
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("")
     public List<Transaction> getTransactions() {
-        return transactionRepository.findAll();
+        return transactionService.getTransactions();
     }
 
     /* Read Specific */
@@ -46,7 +43,7 @@ public class TransactionController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("")
     public void updateTransaction(@Valid @RequestBody Transaction transaction) {
-        transactionRepository.save(transaction);
+        transactionService.updateTransaction(transaction);
     }
 
     /* Delete */
