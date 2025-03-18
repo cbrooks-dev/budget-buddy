@@ -10,44 +10,44 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    UserRepository userRepository;
+    UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     /* Create */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public User createUser(@Valid @RequestBody User user) {
-        return userRepository.save(user);
+        return userService.createUser(user);
     }
 
     /* Read All */
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("")
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return userService.getUsers();
     }
 
     /* Read Specific */
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Integer id) {
-        return null; // TODO: stub
+        return userService.getUserById(id);
     }
 
     /* Update */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("")
     public void updateUser(@Valid @RequestBody User user) {
-        userRepository.save(user);
+        userService.updateUser(user);
     }
 
     /* Delete */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Integer id) {
-        // TODO: stub
+        userService.deleteUser(id);
     }
 }
