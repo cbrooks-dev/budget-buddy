@@ -10,6 +10,8 @@ import java.time.LocalDate;
 public record Transaction(
         @Positive @Id @NotNull
         Integer id,
+        @Positive @NotNull
+        Integer userId,
         @NotNull
         TransactionType transactionType,
         @NotNull
