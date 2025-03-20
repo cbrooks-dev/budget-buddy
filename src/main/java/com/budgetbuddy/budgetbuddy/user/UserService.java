@@ -35,6 +35,13 @@ public class UserService {
         } else throw new UserNotFoundException();
     }
 
+    public List<Transaction> getUserTransactions(Integer id) {
+        User user = userRepository
+                .findById(id)
+                .orElseThrow(UserNotFoundException::new);
+        return transactionRepository.findAllByUserId(id);
+    }
+
     public void updateUser(User user) {
         userRepository.save(user);
     }
@@ -44,12 +51,5 @@ public class UserService {
         if (user.isPresent()) {
             userRepository.delete(user.get());
         } else throw new UserNotFoundException();
-    }
-
-    public List<Transaction> getUserTransactions(Integer id) {
-        User user = userRepository
-                .findById(id)
-                .orElseThrow(UserNotFoundException::new);
-        return transactionRepository.findAllByUserId(id);
     }
 }

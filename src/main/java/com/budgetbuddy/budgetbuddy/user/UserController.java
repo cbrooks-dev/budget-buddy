@@ -1,5 +1,6 @@
 package com.budgetbuddy.budgetbuddy.user;
 
+import com.budgetbuddy.budgetbuddy.transaction.Transaction;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,13 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
+    }
+
+    /* Read All User Transactions */
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/transactions/{id}")
+    public List<Transaction> getUserTransactions(@PathVariable Integer id) {
+        return userService.getUserTransactions(id);
     }
 
     /* Update */
