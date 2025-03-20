@@ -45,6 +45,23 @@ public class UserController {
         return userService.getUserTransactions(id);
     }
 
+    /* Read All User Expenses */
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/transactions/expenses/{id}")
+    public List<Transaction> getUserExpenses(@PathVariable Integer id) {
+        return null; // TODO: stub
+    }
+
+    /* Read All User Incomes */
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/transactions/incomes/{id}")
+    public List<Transaction> getUserIncomes(@PathVariable Integer id) {
+        return null; // TODO: stub
+    }
+
+
     /* Update */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("")
