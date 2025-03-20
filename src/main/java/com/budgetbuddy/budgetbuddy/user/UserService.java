@@ -47,15 +47,9 @@ public class UserService {
     }
 
     public List<Transaction> getUserTransactions(Integer id) {
-        List<Transaction> transactions = new ArrayList<>();
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            for (Transaction transaction : transactionRepository.findAll()) {
-                if (transaction.userId().equals(id)) {
-                    transactions.add(transaction);
-                }
-            }
-        } else throw new UserNotFoundException();
-        return transactions;
+        User user = userRepository
+                .findById(id)
+                .orElseThrow(UserNotFoundException::new);
+        return transactionRepository.findAllByUserId(id);
     }
 }
