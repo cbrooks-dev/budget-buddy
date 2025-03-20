@@ -1,7 +1,10 @@
 package com.budgetbuddy.budgetbuddy.user;
 
+import com.budgetbuddy.budgetbuddy.transaction.Transaction;
+import com.budgetbuddy.budgetbuddy.transaction.TransactionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +12,12 @@ import java.util.Optional;
 public class UserService {
 
     UserRepository userRepository;
+    TransactionRepository transactionRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository,
+                       TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     public User createUser(User user) {
@@ -38,5 +44,18 @@ public class UserService {
         if (user.isPresent()) {
             userRepository.delete(user.get());
         } else throw new UserNotFoundException();
+    }
+
+    public List<Transaction> getUserTransactions(Integer id) {
+        List<Transaction> transactions = new ArrayList<>();
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            for (Transaction transaction : transactionRepository.findAll()) {
+                if (transaction.userId().equals(id)) {
+                    transactions.add(transaction);
+                }
+            }
+        } else throw new UserNotFoundException();
+        return transactions;
     }
 }
