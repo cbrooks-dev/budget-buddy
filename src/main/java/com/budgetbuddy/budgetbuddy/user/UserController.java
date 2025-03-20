@@ -46,7 +46,6 @@ public class UserController {
     }
 
     /* Read All User Expenses */
-
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/transactions/expenses/{id}")
     public List<Transaction> getUserExpenses(@PathVariable Integer id) {
@@ -54,7 +53,6 @@ public class UserController {
     }
 
     /* Read All User Incomes */
-
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/transactions/incomes/{id}")
     public List<Transaction> getUserIncomes(@PathVariable Integer id) {
