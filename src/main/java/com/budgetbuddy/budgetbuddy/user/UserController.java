@@ -50,7 +50,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/transactions/expenses/{id}")
     public List<Transaction> getUserExpenses(@PathVariable Integer id) {
-        return null; // TODO: stub
+        return userService.getUserExpenses(id);
     }
 
     /* Read All User Incomes */
@@ -58,7 +58,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/transactions/incomes/{id}")
     public List<Transaction> getUserIncomes(@PathVariable Integer id) {
-        return null; // TODO: stub
+        return userService.getUserIncomes(id);
     }
 
 

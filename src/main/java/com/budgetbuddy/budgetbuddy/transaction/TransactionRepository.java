@@ -10,5 +10,10 @@ public interface TransactionRepository
         extends ListCrudRepository<Transaction, Integer> {
 
     List<Transaction> findAllByUserId(@Positive @NotNull Integer userId);
+
+    List<Transaction> findAllByUserIdAndTransactionType(
+            @Positive @NotNull Integer userId,
+            @NotNull TransactionType transactionType
+    );
 }
 
